@@ -11,7 +11,8 @@ const outputDir = path.resolve(__dirname, "dist")
 const outputPath = path.join(outputDir, "team.html")
 const render = require("./lib/HtmlGenerator")
 //global array that gets filled up after prompts
-let arrayOfCards = []
+let globalArray = []
+//function to run prompt
 const promptManager = () => {
     return inquirer.prompt([
         {
@@ -38,9 +39,10 @@ const promptManager = () => {
         //creates new object
         let manager = new Manager(res.employeeName, res.id, res.email, res.officeNumber);
         //pushes input to global array
-        arrayOfCards.push(manager); console.log(arrayOfCards);
+        globalArray.push(manager); console.log(globalArray);
     })
 }
+//prompt intern
 const promptIntern = () => {
     return inquirer.prompt([
         {
@@ -65,9 +67,10 @@ const promptIntern = () => {
         }
     ]).then(function (res) {
         let manager = new Manager(res.employeeName, res.id, res.email, res.officeNumber);
-        arrayOfCards.push(manager); console.log(arrayOfCards);
+        globalArray.push(manager); console.log(globalArray);
     })
 }
+//prompt engineer
 const promptEngineer = () => {
     return inquirer.prompt([
         {
@@ -92,7 +95,7 @@ const promptEngineer = () => {
         }
     ]).then(function (res) {
         let manager = new Manager(res.employeeName, res.id, res.email, res.officeNumber);
-        arrayOfCards.push(manager); console.log(arrayOfCards);
+        globalArray.push(manager); console.log(globalArray);
     })
 }
 //loop to decide input of 
@@ -136,7 +139,7 @@ const runLoop = () => {
 promptManager().then(() => {
     return runLoop()
 }).then(() => {
-    return fs.writeFile(outputPath, render(arrayOfCards), "utf-8")
+    return fs.writeFile(outputPath, render(globalArray), "utf-8")
 })
     .then(() => {
         console.log("Big Mackkie Jones Daddy-O!");
