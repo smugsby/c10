@@ -118,7 +118,7 @@ const runLoop = () => {
             ]
         }).then((answers) => {
             if (answers.nextEntry == "Engineer") {
-                //repeat with intern and finish
+                  //repeat with intern and finish
                 return promptEngineer()
             }
             else if (answers.nextEntry == "Intern") {
@@ -131,11 +131,12 @@ const runLoop = () => {
             //runs loop again if not killed    
         }).then((createdEmployee) => {
             if (createdEmployee) {
+            //call out of loop    
                 return runLoop();
             }
         })
 }
-
+//prompt loop
 promptManager().then(() => {
     return runLoop()
 }).then(() => {
