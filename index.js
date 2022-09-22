@@ -7,13 +7,14 @@ const Intern = require("./lib/Intern");
 //const { default: inquirer } = require("inquirer");
 //output
 const outputDir = path.resolve(__dirname, "dist")
-
+const test = require ("./_test_")
 const outputPath = path.join(outputDir, "team.html")
 const render = require("./lib/HtmlGenerator")
 //global array that gets filled up after prompts
 let globalArray = []
 //function to run prompt
 const promptManager = () => {
+    //print on cli
     return inquirer.prompt([
         {
             type: "input",
@@ -34,6 +35,11 @@ const promptManager = () => {
             type: "input",
             name: "officeNumber",
             message: "What is employee number?"
+        },
+        {
+            type: "input",
+            name: "continue",
+            message: "Whould you like to continue?"
         }
     ]).then(function (res) {
         //creates new object
